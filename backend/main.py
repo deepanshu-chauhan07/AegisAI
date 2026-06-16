@@ -1,11 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from app.api.v1.auth import router as auth_router
 
-app = FastAPI(
-    title="AegisAI API",
-    description="Autonomous Enterprise Customer Intelligence & Operations Platform",
-    version="1.0.0"
-)
+app = FastAPI(title="AegisAI API", version="1.0.0")
 
 app.add_middleware(
     CORSMiddleware,
@@ -15,14 +12,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/")
-def root():
-    return {"message": "AegisAI API is running! 🚀"}
+app.include_router(auth_router, prefix="/api/v1/auth", tags=["Auth"])
 
 @app.get("/health")
-def health_check():
-    return {
-        "status": "ok",
-        "service": "AegisAI API",
-        "version": "1.0.0"
-    }
+def health():
+    return {"status": "ok"}
