@@ -22,7 +22,7 @@ app = FastAPI(title="AegisAI API", version="1.0.0", docs_url="/docs", redoc_url=
 app.add_middleware(SecurityMiddleware)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=["http://localhost:5173", "https://aegis-ai-six-omega.vercel.app"],
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE"],
     allow_headers=["Authorization", "Content-Type"],
