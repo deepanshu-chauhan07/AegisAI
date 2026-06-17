@@ -75,9 +75,9 @@ export default function KBListPage() {
           <button key={tab.key} onClick={() => setActiveTab(tab.key as any)}
             style={{
               padding: '8px 20px', borderRadius: '20px', fontSize: '14px', cursor: 'pointer',
-              border: activeTab === tab.key ? '1px solid rgba(79,123,247,0.5)' : '1px solid rgba(255,255,255,0.08)',
-              background: activeTab === tab.key ? 'rgba(79,123,247,0.15)' : 'rgba(255,255,255,0.04)',
-              color: activeTab === tab.key ? '#818CF8' : '#64748B',
+              border: activeTab === tab.key ? '1px solid rgba(225,29,46,0.5)' : '1px solid rgba(255,255,255,0.08)',
+              background: activeTab === tab.key ? 'rgba(225,29,46,0.15)' : 'rgba(255,255,255,0.04)',
+              color: activeTab === tab.key ? '#FF8A93' : '#64748B',
               transition: 'all 0.2s', fontWeight: activeTab === tab.key ? '600' : '400'
             }}>{tab.label}</button>
         ))}
@@ -114,7 +114,7 @@ export default function KBListPage() {
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
                 <div style={{
                   width: '32px', height: '32px',
-                  background: 'linear-gradient(135deg, #1E3AB4, #DC2626)',
+                  background: 'linear-gradient(135deg, #E11D2E, #FF3B4E)',
                   borderRadius: '8px', display: 'flex', alignItems: 'center',
                   justifyContent: 'center', fontSize: '16px'
                 }}>🤖</div>
@@ -133,10 +133,10 @@ export default function KBListPage() {
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                     {citations.map((c, i) => (
                       <div key={i} style={{
-                        background: 'rgba(79,123,247,0.08)', border: '1px solid rgba(79,123,247,0.15)',
+                        background: 'rgba(225,29,46,0.08)', border: '1px solid rgba(225,29,46,0.15)',
                         borderRadius: '10px', padding: '12px 16px'
                       }}>
-                        <div style={{ fontSize: '13px', fontWeight: '500', color: '#818CF8', marginBottom: '4px' }}>
+                        <div style={{ fontSize: '13px', fontWeight: '500', color: '#FF8A93', marginBottom: '4px' }}>
                           📄 {c.doc_title}
                         </div>
                         <div style={{ fontSize: '12px', color: '#64748B' }}>
@@ -172,9 +172,9 @@ export default function KBListPage() {
 
             <label style={{
               display: 'flex', flexDirection: 'column', alignItems: 'center',
-              padding: '48px', border: '2px dashed rgba(79,123,247,0.3)',
+              padding: '48px', border: '2px dashed rgba(225,29,46,0.3)',
               borderRadius: '16px', cursor: 'pointer',
-              background: 'rgba(79,123,247,0.04)',
+              background: 'rgba(225,29,46,0.04)',
               transition: 'all 0.3s ease'
             }}>
               <div style={{ fontSize: '48px', marginBottom: '16px' }}>📄</div>

@@ -78,11 +78,11 @@ export default function AnalyticsPage() {
   useEffect(() => { fetchAll() }, [days])
 
   const priorityColors: any = {
-    critical: '#DC2626', high: '#F59E0B', medium: '#4F7BF7', low: '#10B981'
+    critical: '#DC2626', high: '#F59E0B', medium: '#FF6B7A', low: '#10B981'
   }
 
   const statusColors: any = {
-    open: '#818CF8', in_progress: '#38BDF8', resolved: '#6EE7B7',
+    open: '#FF8A93', in_progress: '#38BDF8', resolved: '#6EE7B7',
     closed: '#94A3B8', escalated: '#FCA5A5', assigned: '#FCD34D'
   }
 
@@ -99,9 +99,9 @@ export default function AnalyticsPage() {
             <button key={d} onClick={() => setDays(d)}
               style={{
                 padding: '7px 16px', borderRadius: '20px', fontSize: '13px', cursor: 'pointer',
-                border: days === d ? '1px solid rgba(79,123,247,0.5)' : '1px solid rgba(255,255,255,0.08)',
-                background: days === d ? 'rgba(79,123,247,0.15)' : 'rgba(255,255,255,0.04)',
-                color: days === d ? '#818CF8' : '#64748B'
+                border: days === d ? '1px solid rgba(225,29,46,0.5)' : '1px solid rgba(255,255,255,0.08)',
+                background: days === d ? 'rgba(225,29,46,0.15)' : 'rgba(255,255,255,0.04)',
+                color: days === d ? '#FF8A93' : '#64748B'
               }}>{d}d</button>
           ))}
         </div>
@@ -110,7 +110,7 @@ export default function AnalyticsPage() {
       {/* KPI Cards */}
       {overview && (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px', marginBottom: '28px' }}>
-          <KPICard title="Total Customers" value={overview.total_customers} icon="👥" color="#4F7BF7" />
+          <KPICard title="Total Customers" value={overview.total_customers} icon="👥" color="#FF6B7A" />
           <KPICard title="Open Tickets" value={overview.open_tickets} icon="🎫" color="#DC2626" subtitle={`${overview.critical_tickets} critical`} />
           <KPICard title="Resolution Rate" value={`${overview.resolution_rate}%`} icon="✅" color="#10B981" subtitle={`${overview.resolved_tickets} resolved`} />
           <KPICard title="SLA Breached" value={overview.sla_breached} icon="⚠️" color="#F59E0B" subtitle="tickets breached SLA" />
@@ -131,7 +131,7 @@ export default function AnalyticsPage() {
               <YAxis tick={{ fill: '#475569', fontSize: 11 }} />
               <Tooltip content={<CustomTooltip />} />
               <Legend wrapperStyle={{ color: '#94A3B8', fontSize: '12px' }} />
-              <Line type="monotone" dataKey="created" stroke="#4F7BF7" strokeWidth={2} dot={false} name="Created" />
+              <Line type="monotone" dataKey="created" stroke="#FF6B7A" strokeWidth={2} dot={false} name="Created" />
               <Line type="monotone" dataKey="resolved" stroke="#10B981" strokeWidth={2} dot={false} name="Resolved" />
             </LineChart>
           </ResponsiveContainer>
@@ -169,7 +169,7 @@ export default function AnalyticsPage() {
               <Tooltip content={<CustomTooltip />} />
               <Bar dataKey="count" name="Tickets" radius={[6, 6, 0, 0]}>
                 {byPriority.map((entry, i) => (
-                  <Cell key={i} fill={priorityColors[entry.priority] || '#4F7BF7'} />
+                  <Cell key={i} fill={priorityColors[entry.priority] || '#FF6B7A'} />
                 ))}
               </Bar>
             </BarChart>
@@ -187,7 +187,7 @@ export default function AnalyticsPage() {
               <Tooltip content={<CustomTooltip />} />
               <Bar dataKey="count" name="Tickets" radius={[0, 6, 6, 0]}>
                 {byStatus.map((entry, i) => (
-                  <Cell key={i} fill={statusColors[entry.status] || '#4F7BF7'} />
+                  <Cell key={i} fill={statusColors[entry.status] || '#FF6B7A'} />
                 ))}
               </Bar>
             </BarChart>

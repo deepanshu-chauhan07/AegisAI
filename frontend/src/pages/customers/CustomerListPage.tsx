@@ -207,7 +207,7 @@ export default function CustomerListPage() {
                   <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                     <div style={{
                       width: '38px', height: '38px', borderRadius: '50%',
-                      background: 'linear-gradient(135deg, #1E3AB4, #DC2626)',
+                      background: 'linear-gradient(135deg, #E11D2E, #FF3B4E)',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
                       fontSize: '15px', fontWeight: '700', flexShrink: 0
                     }}>{c.contact_name.charAt(0).toUpperCase()}</div>
@@ -219,7 +219,7 @@ export default function CustomerListPage() {
                 </td>
                 <td style={{ padding: '16px 20px', fontSize: '14px', color: '#94A3B8' }}>{c.company_name || '—'}</td>
                 <td style={{ padding: '16px 20px' }}>
-                  <span style={{ background: 'rgba(79,123,247,0.15)', color: '#4F7BF7', border: '1px solid rgba(79,123,247,0.3)', padding: '3px 10px', borderRadius: '20px', fontSize: '12px' }}>
+                  <span style={{ background: 'rgba(225,29,46,0.15)', color: '#FF6B7A', border: '1px solid rgba(225,29,46,0.3)', padding: '3px 10px', borderRadius: '20px', fontSize: '12px' }}>
                     {c.plan_tier}
                   </span>
                 </td>
@@ -233,7 +233,7 @@ export default function CustomerListPage() {
                 </td>
                 <td style={{ padding: '16px 20px' }}>{getChurnBadge(c.churn_risk)}</td>
                 <td style={{ padding: '16px 20px' }}>
-                  <button style={{ background: 'rgba(79,123,247,0.1)', border: '1px solid rgba(79,123,247,0.2)', color: '#4F7BF7', padding: '6px 14px', borderRadius: '8px', fontSize: '13px', cursor: 'pointer' }}>
+                  <button style={{ background: 'rgba(225,29,46,0.1)', border: '1px solid rgba(225,29,46,0.2)', color: '#FF6B7A', padding: '6px 14px', borderRadius: '8px', fontSize: '13px', cursor: 'pointer' }}>
                     View →
                   </button>
                 </td>

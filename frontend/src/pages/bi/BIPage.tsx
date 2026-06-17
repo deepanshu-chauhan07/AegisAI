@@ -4,7 +4,7 @@ import { BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, Cart
 const API = 'http://localhost:8000/api/v1'
 const getToken = () => localStorage.getItem('token') || ''
 
-const COLORS = ['#4F7BF7', '#DC2626', '#10B981', '#F59E0B', '#818CF8', '#38BDF8']
+const COLORS = ['#FF6B7A', '#DC2626', '#10B981', '#F59E0B', '#FF8A93', '#38BDF8']
 
 const suggestions = [
   "Show all tickets by priority",
@@ -135,8 +135,8 @@ export default function BIPage() {
               <button key={i} onClick={() => handleQuery(s)}
                 style={{
                   padding: '5px 12px', borderRadius: '20px', fontSize: '12px', cursor: 'pointer',
-                  border: '1px solid rgba(79,123,247,0.2)', background: 'rgba(79,123,247,0.08)',
-                  color: '#818CF8', transition: 'all 0.2s'
+                  border: '1px solid rgba(225,29,46,0.2)', background: 'rgba(225,29,46,0.08)',
+                  color: '#FF8A93', transition: 'all 0.2s'
                 }}>{s}</button>
             ))}
           </div>
@@ -165,7 +165,7 @@ export default function BIPage() {
             <div className="glass fade-in-up" style={{ padding: '20px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
                 <div style={{
-                  width: '28px', height: '28px', background: 'linear-gradient(135deg, #1E3AB4, #DC2626)',
+                  width: '28px', height: '28px', background: 'linear-gradient(135deg, #E11D2E, #FF3B4E)',
                   borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '14px'
                 }}>🧠</div>
                 <span style={{ fontSize: '14px', fontWeight: '600' }}>AI Insight</span>
@@ -221,7 +221,7 @@ export default function BIPage() {
                 🔍 View generated SQL
               </summary>
               <div style={{ background: 'rgba(0,0,0,0.3)', borderRadius: '10px', padding: '16px', marginTop: '8px' }}>
-                <code style={{ color: '#818CF8', fontSize: '13px', fontFamily: 'JetBrains Mono, monospace' }}>
+                <code style={{ color: '#FF8A93', fontSize: '13px', fontFamily: 'JetBrains Mono, monospace' }}>
                   {result.sql}
                 </code>
               </div>

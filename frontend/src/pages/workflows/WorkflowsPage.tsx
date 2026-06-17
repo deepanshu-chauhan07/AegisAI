@@ -158,7 +158,7 @@ export default function WorkflowsPage() {
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
                       <span style={{
                         fontSize: '12px', padding: '4px 10px', borderRadius: '8px',
-                        background: 'rgba(79,123,247,0.1)', color: '#818CF8', border: '1px solid rgba(79,123,247,0.2)'
+                        background: 'rgba(225,29,46,0.1)', color: '#FF8A93', border: '1px solid rgba(225,29,46,0.2)'
                       }}>{triggerInfo?.icon} {triggerInfo?.label.split(' ').slice(1).join(' ')}</span>
                       <span style={{ color: '#475569' }}>→</span>
                       {wf.conditions.length > 0 && (
@@ -218,8 +218,8 @@ export default function WorkflowsPage() {
 
             {/* Trigger */}
             <div style={{ marginBottom: '24px' }}>
-              <label style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#818CF8', fontSize: '13px', fontWeight: '700', marginBottom: '10px' }}>
-                <span style={{ width: '24px', height: '24px', borderRadius: '50%', background: 'rgba(79,123,247,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px' }}>1</span>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#FF8A93', fontSize: '13px', fontWeight: '700', marginBottom: '10px' }}>
+                <span style={{ width: '24px', height: '24px', borderRadius: '50%', background: 'rgba(225,29,46,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px' }}>1</span>
                 WHEN (Trigger)
               </label>
               <select className="glass-input" value={trigger} onChange={e => setTrigger(e.target.value)}>

@@ -15,12 +15,12 @@ interface Ticket {
 const priorityConfig: any = {
   critical: { bg: 'rgba(220,38,38,0.15)', color: '#FCA5A5', border: 'rgba(220,38,38,0.4)' },
   high: { bg: 'rgba(245,158,11,0.15)', color: '#FCD34D', border: 'rgba(245,158,11,0.4)' },
-  medium: { bg: 'rgba(79,123,247,0.15)', color: '#818CF8', border: 'rgba(79,123,247,0.4)' },
+  medium: { bg: 'rgba(225,29,46,0.15)', color: '#FF8A93', border: 'rgba(225,29,46,0.4)' },
   low: { bg: 'rgba(16,185,129,0.15)', color: '#6EE7B7', border: 'rgba(16,185,129,0.4)' },
 }
 
 const statusConfig: any = {
-  open: { bg: 'rgba(79,123,247,0.15)', color: '#818CF8', border: 'rgba(79,123,247,0.3)' },
+  open: { bg: 'rgba(225,29,46,0.15)', color: '#FF8A93', border: 'rgba(225,29,46,0.3)' },
   assigned: { bg: 'rgba(245,158,11,0.15)', color: '#FCD34D', border: 'rgba(245,158,11,0.3)' },
   in_progress: { bg: 'rgba(14,165,233,0.15)', color: '#38BDF8', border: 'rgba(14,165,233,0.3)' },
   resolved: { bg: 'rgba(16,185,129,0.15)', color: '#6EE7B7', border: 'rgba(16,185,129,0.3)' },
@@ -144,9 +144,9 @@ export default function TicketListPage() {
           <button key={s} onClick={() => { setStatusFilter(s); setPage(1) }}
             style={{
               padding: '7px 16px', borderRadius: '20px', fontSize: '13px', cursor: 'pointer',
-              border: statusFilter === s ? '1px solid rgba(79,123,247,0.5)' : '1px solid rgba(255,255,255,0.08)',
-              background: statusFilter === s ? 'rgba(79,123,247,0.15)' : 'rgba(255,255,255,0.04)',
-              color: statusFilter === s ? '#818CF8' : '#64748B', transition: 'all 0.2s'
+              border: statusFilter === s ? '1px solid rgba(225,29,46,0.5)' : '1px solid rgba(255,255,255,0.08)',
+              background: statusFilter === s ? 'rgba(225,29,46,0.15)' : 'rgba(255,255,255,0.04)',
+              color: statusFilter === s ? '#FF8A93' : '#64748B', transition: 'all 0.2s'
             }}>{s || 'All'}</button>
         ))}
       </div>
@@ -184,7 +184,7 @@ export default function TicketListPage() {
                 <tr key={t.id}
                   style={{
                     borderBottom: '1px solid rgba(255,255,255,0.04)', cursor: 'pointer',
-                    background: selectedTicket?.id === t.id ? 'rgba(79,123,247,0.08)' : 'transparent',
+                    background: selectedTicket?.id === t.id ? 'rgba(225,29,46,0.08)' : 'transparent',
                     transition: 'background 0.2s'
                   }}
                   onMouseEnter={e => { if (selectedTicket?.id !== t.id) e.currentTarget.style.background = 'rgba(255,255,255,0.03)' }}
@@ -206,8 +206,8 @@ export default function TicketListPage() {
                     <button
                       onClick={() => { setSelectedTicket(t); setShowCopilot(true); setCopilotResult(''); setSentiment(null) }}
                       style={{
-                        background: 'linear-gradient(135deg, rgba(30,58,180,0.2), rgba(220,38,38,0.1))',
-                        border: '1px solid rgba(79,123,247,0.3)', color: '#818CF8',
+                        background: 'linear-gradient(135deg, rgba(225,29,46,0.2), rgba(220,38,38,0.1))',
+                        border: '1px solid rgba(225,29,46,0.3)', color: '#FF8A93',
                         padding: '6px 12px', borderRadius: '8px', fontSize: '12px', cursor: 'pointer'
                       }}>🤖 AI</button>
                   </td>
@@ -224,7 +224,7 @@ export default function TicketListPage() {
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <div style={{
                   width: '28px', height: '28px',
-                  background: 'linear-gradient(135deg, #1E3AB4, #DC2626)',
+                  background: 'linear-gradient(135deg, #E11D2E, #FF3B4E)',
                   borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '14px'
                 }}>🤖</div>
                 <span style={{ fontSize: '14px', fontWeight: '600' }}>AI Copilot</span>
@@ -233,8 +233,8 @@ export default function TicketListPage() {
                 style={{ background: 'none', border: 'none', color: '#475569', cursor: 'pointer', fontSize: '18px' }}>✕</button>
             </div>
 
-            <div style={{ background: 'rgba(79,123,247,0.08)', border: '1px solid rgba(79,123,247,0.15)', borderRadius: '10px', padding: '12px', marginBottom: '16px' }}>
-              <p style={{ fontSize: '12px', color: '#818CF8', fontWeight: '600', marginBottom: '4px' }}>SELECTED TICKET</p>
+            <div style={{ background: 'rgba(225,29,46,0.08)', border: '1px solid rgba(225,29,46,0.15)', borderRadius: '10px', padding: '12px', marginBottom: '16px' }}>
+              <p style={{ fontSize: '12px', color: '#FF8A93', fontWeight: '600', marginBottom: '4px' }}>SELECTED TICKET</p>
               <p style={{ fontSize: '13px', color: '#CBD5E1' }}>{selectedTicket.title}</p>
             </div>
 
@@ -247,9 +247,9 @@ export default function TicketListPage() {
                 <button key={tab.key} onClick={() => setCopilotTab(tab.key as any)}
                   style={{
                     flex: 1, padding: '7px 4px', borderRadius: '8px', fontSize: '11px', cursor: 'pointer',
-                    border: copilotTab === tab.key ? '1px solid rgba(79,123,247,0.5)' : '1px solid rgba(255,255,255,0.08)',
-                    background: copilotTab === tab.key ? 'rgba(79,123,247,0.15)' : 'rgba(255,255,255,0.04)',
-                    color: copilotTab === tab.key ? '#818CF8' : '#64748B'
+                    border: copilotTab === tab.key ? '1px solid rgba(225,29,46,0.5)' : '1px solid rgba(255,255,255,0.08)',
+                    background: copilotTab === tab.key ? 'rgba(225,29,46,0.15)' : 'rgba(255,255,255,0.04)',
+                    color: copilotTab === tab.key ? '#FF8A93' : '#64748B'
                   }}>{tab.label}</button>
               ))}
             </div>
@@ -276,7 +276,7 @@ export default function TicketListPage() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                 {[
                   { label: 'Sentiment', value: sentiment.sentiment, color: getSentimentColor(sentiment.sentiment) },
-                  { label: 'Emotion', value: sentiment.dominant_emotion, color: '#818CF8' },
+                  { label: 'Emotion', value: sentiment.dominant_emotion, color: '#FF8A93' },
                   { label: 'Urgency', value: sentiment.urgency, color: '#F59E0B' },
                   { label: 'Score', value: sentiment.score?.toFixed(2), color: '#94A3B8' },
                 ].map(item => (

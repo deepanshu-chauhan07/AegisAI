@@ -1,5 +1,5 @@
 const kpis = [
-  { label: 'Total Customers', value: '1,247', change: '+12%', icon: '👥', color: '#4F7BF7' },
+  { label: 'Total Customers', value: '1,247', change: '+12%', icon: '👥', color: '#FF6B7A' },
   { label: 'Open Tickets', value: '89', change: '-5%', icon: '🎫', color: '#DC2626' },
   { label: 'Avg Resolution', value: '4.2h', change: '-18%', icon: '⚡', color: '#10B981' },
   { label: 'CSAT Score', value: '4.8/5', change: '+0.3', icon: '⭐', color: '#F59E0B' },
@@ -53,7 +53,7 @@ export default function DashboardPage() {
         <div className="glass" style={{ padding: '24px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
             <h2 style={{ fontSize: '16px', fontWeight: '600' }}>Recent Tickets</h2>
-            <a href="/tickets" style={{ color: '#4F7BF7', fontSize: '13px', textDecoration: 'none' }}>View all →</a>
+            <a href="/tickets" style={{ color: '#FF6B7A', fontSize: '13px', textDecoration: 'none' }}>View all →</a>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {recentTickets.map((ticket, i) => (
@@ -85,8 +85,8 @@ export default function DashboardPage() {
         <div className="glass" style={{ padding: '24px' }}>
           <h2 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '16px' }}>🤖 AI Copilot</h2>
           <div style={{
-            background: 'linear-gradient(135deg, rgba(30,58,180,0.15), rgba(220,38,38,0.1))',
-            border: '1px solid rgba(79,123,247,0.2)',
+            background: 'linear-gradient(135deg, rgba(225,29,46,0.15), rgba(220,38,38,0.1))',
+            border: '1px solid rgba(225,29,46,0.2)',
             borderRadius: '12px', padding: '16px', marginBottom: '16px'
           }}>
             <p style={{ fontSize: '13px', color: '#94A3B8', lineHeight: '1.6' }}>

@@ -15,7 +15,7 @@ export default function AICopilotPage() {
           AI Copilot is ticket-based
         </h2>
         <p style={{ color: '#475569', fontSize: '14px', marginBottom: '28px' }}>
-          Open any ticket and click the <strong style={{color: '#818CF8'}}>🤖 AI</strong> button
+          Open any ticket and click the <strong style={{color: '#FF8A93'}}>🤖 AI</strong> button
         </p>
         <a href="/tickets">
           <button className="btn-primary" style={{ width: 'auto', padding: '12px 28px' }}>

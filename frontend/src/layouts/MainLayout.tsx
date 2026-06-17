@@ -91,7 +91,7 @@ export default function MainLayout() {
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '8px 8px 24px', borderBottom: '1px solid rgba(255,255,255,0.06)', marginBottom: '16px' }}>
           <div style={{
             width: '36px', height: '36px', minWidth: '36px',
-            background: 'linear-gradient(135deg, #1E3AB4, #DC2626)',
+            background: 'linear-gradient(135deg, #E11D2E, #FF3B4E)',
             borderRadius: '10px', display: 'flex', alignItems: 'center',
             justifyContent: 'center', fontSize: '18px', boxShadow: '0 4px 15px rgba(220,38,38,0.3)'
           }}>🛡️</div>
@@ -175,7 +175,7 @@ export default function MainLayout() {
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
                     <span style={{ fontSize: '14px', fontWeight: '600' }}>Notifications</span>
                     {unreadCount > 0 && (
-                      <button onClick={markAllRead} style={{ background: 'none', border: 'none', color: '#4F7BF7', fontSize: '12px', cursor: 'pointer' }}>
+                      <button onClick={markAllRead} style={{ background: 'none', border: 'none', color: '#FF6B7A', fontSize: '12px', cursor: 'pointer' }}>
                         Mark all read
                       </button>
                     )}
@@ -186,13 +186,13 @@ export default function MainLayout() {
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                       {notifications.map(n => (
                         <div key={n.id} onClick={() => !n.read_at && markOneRead(n.id)} style={{
-                          background: n.read_at ? 'rgba(255,255,255,0.02)' : 'rgba(79,123,247,0.08)',
-                          border: `1px solid ${n.read_at ? 'rgba(255,255,255,0.04)' : 'rgba(79,123,247,0.15)'}`,
+                          background: n.read_at ? 'rgba(255,255,255,0.02)' : 'rgba(225,29,46,0.08)',
+                          border: `1px solid ${n.read_at ? 'rgba(255,255,255,0.04)' : 'rgba(225,29,46,0.15)'}`,
                           borderRadius: '10px', padding: '12px', cursor: n.read_at ? 'default' : 'pointer'
                         }}>
                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '4px' }}>
                             <span style={{ fontSize: '13px', fontWeight: '600', color: n.read_at ? '#94A3B8' : '#F1F5F9' }}>{n.title}</span>
-                            {!n.read_at && <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#4F7BF7', marginTop: '4px' }} />}
+                            {!n.read_at && <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#FF6B7A', marginTop: '4px' }} />}
                           </div>
                           <p style={{ fontSize: '12px', color: '#64748B', marginBottom: '4px' }}>{n.message}</p>
                           <span style={{ fontSize: '11px', color: '#475569' }}>{timeAgo(n.created_at)}</span>
@@ -206,7 +206,7 @@ export default function MainLayout() {
 
             <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10B981', boxShadow: '0 0 8px #10B981' }} />
             <div style={{
-              width: '36px', height: '36px', background: 'linear-gradient(135deg, #1E3AB4, #DC2626)',
+              width: '36px', height: '36px', background: 'linear-gradient(135deg, #E11D2E, #FF3B4E)',
               borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',
               fontSize: '14px', fontWeight: '600', cursor: 'pointer'
             }}>D</div>

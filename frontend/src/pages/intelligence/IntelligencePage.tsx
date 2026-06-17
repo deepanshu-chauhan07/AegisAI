@@ -88,7 +88,7 @@ export default function IntelligencePage() {
           {/* KPI Row */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px', marginBottom: '24px' }}>
             <div className="kpi-card fade-in-up">
-              <div style={{ fontSize: '30px', fontWeight: '700', color: '#4F7BF7', marginBottom: '4px' }}>{overview.total_customers}</div>
+              <div style={{ fontSize: '30px', fontWeight: '700', color: '#FF6B7A', marginBottom: '4px' }}>{overview.total_customers}</div>
               <div style={{ fontSize: '13px', color: '#94A3B8' }}>Total Customers Analyzed</div>
             </div>
             <div className="kpi-card fade-in-up-delay-1">
@@ -179,9 +179,9 @@ export default function IntelligencePage() {
               ) : shapResult && (
                 <div>
                   <div style={{ display: 'flex', gap: '16px', marginBottom: '20px', flexWrap: 'wrap' }}>
-                    <div style={{ background: 'rgba(79,123,247,0.1)', border: '1px solid rgba(79,123,247,0.2)', borderRadius: '12px', padding: '12px 20px' }}>
-                      <div style={{ fontSize: '12px', color: '#818CF8' }}>Churn Probability</div>
-                      <div style={{ fontSize: '20px', fontWeight: '700', color: '#818CF8' }}>{Math.round(shapResult.churn_probability * 100)}%</div>
+                    <div style={{ background: 'rgba(225,29,46,0.1)', border: '1px solid rgba(225,29,46,0.2)', borderRadius: '12px', padding: '12px 20px' }}>
+                      <div style={{ fontSize: '12px', color: '#FF8A93' }}>Churn Probability</div>
+                      <div style={{ fontSize: '20px', fontWeight: '700', color: '#FF8A93' }}>{Math.round(shapResult.churn_probability * 100)}%</div>
                     </div>
                     <div style={{ background: `${riskColors[shapResult.churn_risk]}15`, border: `1px solid ${riskColors[shapResult.churn_risk]}30`, borderRadius: '12px', padding: '12px 20px' }}>
                       <div style={{ fontSize: '12px', color: riskColors[shapResult.churn_risk] }}>Risk Level</div>

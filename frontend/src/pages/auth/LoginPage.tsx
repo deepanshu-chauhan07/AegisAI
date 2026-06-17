@@ -37,7 +37,7 @@ export default function LoginPage() {
         <div className="fade-in-up fade-in-up-delay-1" style={{ textAlign: 'center', marginBottom: '32px' }}>
           <div style={{
             width: '56px', height: '56px',
-            background: 'linear-gradient(135deg, #1E3AB4, #DC2626)',
+            background: 'linear-gradient(135deg, #E11D2E, #FF3B4E)',
             borderRadius: '16px', margin: '0 auto 16px',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             fontSize: '24px', boxShadow: '0 8px 32px rgba(220,38,38,0.3)'
@@ -74,7 +74,7 @@ export default function LoginPage() {
         <div style={{ textAlign: 'center', marginTop: '24px' }}>
           <p style={{ color: '#475569', fontSize: '13px' }}>
             Don't have an account?{' '}
-            <a href="/register" style={{ color: '#4F7BF7', textDecoration: 'none', fontWeight: '500' }}>Create one</a>
+            <a href="/register" style={{ color: '#FF6B7A', textDecoration: 'none', fontWeight: '500' }}>Create one</a>
           </p>
         </div>
       </div>
