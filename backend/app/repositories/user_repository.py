@@ -1,9 +1,13 @@
 from sqlalchemy.orm import Session
 from app.models.user import User, Role
 from app.core.security import hash_password
+import uuid
 
 def get_user_by_email(db: Session, email: str):
     return db.query(User).filter(User.email == email).first()
+
+def get_user_by_id(db: Session, user_id: uuid.UUID):
+    return db.query(User).filter(User.id == user_id).first()
 
 def get_or_create_role(db: Session, role_name: str):
     role = db.query(Role).filter(Role.name == role_name).first()

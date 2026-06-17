@@ -1,0 +1,9 @@
+contact_name,email,company_name,phone,plan_tier,signup_date,total_tickets,critical_tickets,sla_breaches,open_tickets,resolved_tickets,last_interaction_days_ago,churned
+Amit Verma,amit.verma@brightcorp.com,BrightCorp,+91-9811122233,enterprise,2024-01-15,12,1,0,1,11,3,0
+Neha Kapoor,neha.kapoor@zentech.io,ZenTech,+91-9822233344,pro,2023-11-02,28,6,4,5,23,1,1
+Rohit Malhotra,rohit.m@finedge.com,FinEdge,+91-9833344455,starter,2024-03-20,5,0,0,0,5,15,0
+Pooja Iyer,pooja.iyer@cloudnine.in,CloudNine,+91-9844455566,free,2024-05-10,2,0,0,1,1,30,0
+Karan Mehta,karan.mehta@quicklogix.com,QuickLogix,+91-9855566677,pro,2023-08-18,40,9,7,8,32,0,1
+Ananya Rao,ananya.rao@bizwave.com,BizWave,+91-9866677788,enterprise,2022-12-01,18,2,1,2,16,8,0
+Suresh Pillai,suresh.pillai@datasphere.io,DataSphere,+91-9877788899,starter,2024-02-14,9,1,1,3,6,5,0
+Divya Nair,divya.nair@nimbusapps.com,NimbusApps,+91-9888899900,pro,2023-06-25,33,7,5,6,27,2,1

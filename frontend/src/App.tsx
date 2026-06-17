@@ -1,16 +1,40 @@
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import LoginPage from './pages/auth/LoginPage'
+import RegisterPage from './pages/auth/RegisterPage'
+import MainLayout from './layouts/MainLayout'
+import DashboardPage from './pages/dashboard/DashboardPage'
+import CustomerListPage from './pages/customers/CustomerListPage'
+import TicketListPage from './pages/tickets/TicketListPage'
+import KBListPage from './pages/knowledge-base/KBListPage'
+import AnalyticsPage from './pages/analytics/AnalyticsPage'
+import AICopilotPage from './pages/ai/AICopilotPage'
+import BIPage from './pages/bi/BIPage'
+import WorkflowsPage from './pages/workflows/WorkflowsPage'
+import IntelligencePage from './pages/intelligence/IntelligencePage'
+
 function App() {
+  const token = localStorage.getItem('token')
   return (
-    <div style={{backgroundColor: "#0F172A", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center"}}>
-      <div style={{backgroundColor: "#1E293B", padding: "2rem", borderRadius: "12px", textAlign: "center"}}>
-        <h1 style={{color: "#0EA5E9", fontSize: "2.5rem", fontWeight: "bold"}}>AegisAI</h1>
-        <p style={{color: "#94A3B8"}}>Autonomous Enterprise Customer Intelligence Platform</p>
-        <div style={{display: "flex", gap: "0.75rem", justifyContent: "center"}}>
-          <span style={{backgroundColor: "#1E3A5F", color: "#F1F5F9", padding: "0.25rem 0.75rem", borderRadius: "24px"}}>React</span>
-          <span style={{backgroundColor: "#1E3A5F", color: "#F1F5F9", padding: "0.25rem 0.75rem", borderRadius: "24px"}}>FastAPI</span>
-          <span style={{backgroundColor: "#1E3A5F", color: "#F1F5F9", padding: "0.25rem 0.75rem", borderRadius: "24px"}}>Vite</span>
-        </div>
-      </div>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/" element={token ? <MainLayout /> : <Navigate to="/login" replace />}>
+          <Route index element={<Navigate to="/dashboard" replace />} />
+          <Route path="dashboard" element={<DashboardPage />} />
+          <Route path="customers" element={<CustomerListPage />} />
+          <Route path="tickets" element={<TicketListPage />} />
+          <Route path="knowledge-base" element={<KBListPage />} />
+          <Route path="analytics" element={<AnalyticsPage />} />
+          <Route path="copilot" element={<AICopilotPage />} />
+          <Route path="bi" element={<BIPage />} />
+          <Route path="workflows" element={<WorkflowsPage />} />
+          <Route path="intelligence" element={<IntelligencePage />} />
+          <Route path="settings" element={<div style={{padding:'40px',color:'#94A3B8', fontSize:'20px'}}>⚙️ Settings — Coming Soon</div>} />
+        </Route>
+        <Route path="*" element={<Navigate to="/login" replace />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
