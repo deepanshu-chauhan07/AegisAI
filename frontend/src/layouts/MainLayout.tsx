@@ -17,7 +17,7 @@ const bottomItems = [
   { icon: '⚙️', label: 'Settings', path: '/settings' },
 ]
 
-const API = 'http://localhost:8000/api/v1'
+const API = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/v1'
 const getToken = () => localStorage.getItem('token') || ''
 
 export default function MainLayout() {

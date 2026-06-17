@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 
-const API = 'http://localhost:8000/api/v1'
+const API = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/v1'
 const getToken = () => localStorage.getItem('token') || ''
 
 const COLORS = ['#FF6B7A', '#DC2626', '#10B981', '#F59E0B', '#FF8A93', '#38BDF8']

@@ -36,7 +36,7 @@ const getChurnBadge = (risk: string) => {
   )
 }
 
-const API = 'http://localhost:8000/api/v1'
+const API = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/v1'
 
 const getToken = () => localStorage.getItem('token') || ''
 
@@ -110,7 +110,7 @@ export default function CustomerListPage() {
     try {
       const formData = new FormData()
       formData.append('file', file)
-      const res = await fetch('http://localhost:8000/api/v1/customers/import-csv', {
+      const res = await fetch((import.meta.env.VITE_API_URL || 'http://localhost:8000/api/v1') + '/customers/import-csv', {
         method: 'POST',
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         body: formData
