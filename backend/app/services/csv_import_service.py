@@ -13,6 +13,21 @@ OPTIONAL_COLUMNS = [
     "open_tickets", "resolved_tickets", "last_interaction_days_ago", "churned"
 ]
 
+def calculate_health_score(row) -> float:
+    """Derive a 0-100 health score from CSV ticket signals."""
+    total_tickets = float(row.get("total_tickets", 0) or 0)
+    critical_tickets = float(row.get("critical_tickets", 0) or 0)
+    sla_breaches = float(row.get("sla_breaches", 0) or 0)
+    resolved_tickets = float(row.get("resolved_tickets", 0) or 0)
+
+    score = 100.0
+    score -= sla_breaches * 8
+    if total_tickets > 0:
+        score -= (critical_tickets / total_tickets) * 30
+        resolution_rate = resolved_tickets / total_tickets
+        score -= (1 - resolution_rate) * 15
+    return max(0.0, min(100.0, score))
+
 async def import_customers_csv(db: Session, file: UploadFile):
     if not file.filename.endswith(".csv"):
         raise HTTPException(status_code=400, detail="Only .csv files are allowed")
@@ -40,6 +55,7 @@ async def import_customers_csv(db: Session, file: UploadFile):
                 continue
 
             existing = db.query(Customer).filter(Customer.email == email).first()
+            health_score = calculate_health_score(row)
 
             data = {
                 "contact_name": str(row.get("contact_name", "Unknown")).strip(),
@@ -47,6 +63,7 @@ async def import_customers_csv(db: Session, file: UploadFile):
                 "company_name": str(row.get("company_name", "")).strip() or None,
                 "phone": str(row.get("phone", "")).strip() or None,
                 "plan_tier": str(row.get("plan_tier", "free")).strip().lower(),
+                "health_score": health_score,
             }
 
             if existing:

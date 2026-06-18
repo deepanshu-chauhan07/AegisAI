@@ -11,6 +11,7 @@ import AICopilotPage from './pages/ai/AICopilotPage'
 import BIPage from './pages/bi/BIPage'
 import WorkflowsPage from './pages/workflows/WorkflowsPage'
 import IntelligencePage from './pages/intelligence/IntelligencePage'
+import SettingsPage from './pages/settings/SettingsPage'
 
 function App() {
   const token = localStorage.getItem('token')
@@ -30,7 +31,7 @@ function App() {
           <Route path="bi" element={<BIPage />} />
           <Route path="workflows" element={<WorkflowsPage />} />
           <Route path="intelligence" element={<IntelligencePage />} />
-          <Route path="settings" element={<div style={{padding:'40px',color:'#94A3B8', fontSize:'20px'}}>⚙️ Settings — Coming Soon</div>} />
+          <Route path="settings" element={<SettingsPage />} />
         </Route>
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>

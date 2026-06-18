@@ -12,6 +12,7 @@ from app.api.v1.workflows import router as workflow_router
 from app.api.v1.notifications import router as notification_router
 from app.api.v1.intelligence import router as intelligence_router
 from app.api.v1.privacy import router as privacy_router
+from app.api.v1.team import router as team_router
 from app.middleware.security import SecurityMiddleware
 from app.core.error_handler import (
     http_exception_handler, validation_exception_handler, generic_exception_handler
@@ -43,6 +44,7 @@ app.include_router(workflow_router, prefix="/api/v1/workflows", tags=["Workflows
 app.include_router(notification_router, prefix="/api/v1/notifications", tags=["Notifications"])
 app.include_router(intelligence_router, prefix="/api/v1/intelligence", tags=["Predictive Intelligence"])
 app.include_router(privacy_router, prefix="/api/v1/privacy", tags=["Privacy & GDPR"])
+app.include_router(team_router, prefix="/api/v1/team", tags=["Team Management"])
 
 @app.get("/health")
 def health():

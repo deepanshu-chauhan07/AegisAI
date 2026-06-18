@@ -31,3 +31,92 @@ def get_me(current_user: User = Depends(get_current_user)):
 def logout(current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
     create_audit_log(db, current_user.id, "USER_LOGOUT", "auth", None)
     return {"message": "Logged out successfully"}
+
+
+from pydantic import BaseModel
+from app.core.security import verify_password, hash_password
+from app.core.auth_deps import get_current_user
+from app.core.sanitizer import validate_password_strength
+
+class UpdateProfileRequest(BaseModel):
+    full_name: str
+
+class ChangePasswordRequest(BaseModel):
+    current_password: str
+    new_password: str
+
+@router.get("/me", response_model=UserResponse)
+def get_me(current_user: User = Depends(get_current_user)):
+    return current_user
+
+@router.patch("/me", response_model=UserResponse)
+def update_profile(
+    data: UpdateProfileRequest,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    current_user.full_name = data.full_name.strip()
+    db.commit()
+    db.refresh(current_user)
+    return current_user
+
+@router.post("/change-password")
+def change_password(
+    data: ChangePasswordRequest,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    if not verify_password(data.current_password, current_user.hashed_pwd):
+        raise HTTPException(status_code=400, detail="Current password is incorrect")
+
+    is_valid, msg = validate_password_strength(data.new_password)
+    if not is_valid:
+        raise HTTPException(status_code=400, detail=msg)
+
+    current_user.hashed_pwd = get_password_hash(data.new_password)
+    db.commit()
+    return {"message": "Password changed successfully"}
+
+
+from pydantic import BaseModel
+from app.core.security import verify_password, hash_password
+from app.core.sanitizer import validate_password_strength
+
+class UpdateProfileRequest(BaseModel):
+    full_name: str
+
+class ChangePasswordRequest(BaseModel):
+    current_password: str
+    new_password: str
+
+@router.get("/me", response_model=UserResponse)
+def get_me(current_user: User = Depends(get_current_user)):
+    return current_user
+
+@router.patch("/me", response_model=UserResponse)
+def update_profile(
+    data: UpdateProfileRequest,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    current_user.full_name = data.full_name.strip()
+    db.commit()
+    db.refresh(current_user)
+    return current_user
+
+@router.post("/change-password")
+def change_password(
+    data: ChangePasswordRequest,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    if not verify_password(data.current_password, current_user.hashed_pwd):
+        raise HTTPException(status_code=400, detail="Current password is incorrect")
+
+    is_valid, msg = validate_password_strength(data.new_password)
+    if not is_valid:
+        raise HTTPException(status_code=400, detail=msg)
+
+    current_user.hashed_pwd = hash_password(data.new_password)
+    db.commit()
+    return {"message": "Password changed successfully"}
