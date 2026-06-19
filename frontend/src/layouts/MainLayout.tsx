@@ -1,25 +1,26 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation, Outlet } from 'react-router-dom'
 
+// roles: which roles can see this nav item. Omitting "roles" means everyone can see it.
 const navItems = [
   { icon: '⊞', label: 'Dashboard', path: '/dashboard' },
   { icon: '👥', label: 'Customers', path: '/customers' },
   { icon: '🎫', label: 'Tickets', path: '/tickets' },
   { icon: '📚', label: 'Knowledge Base', path: '/knowledge-base' },
   { icon: '🤖', label: 'AI Copilot', path: '/copilot' },
-  { icon: '📊', label: 'Analytics', path: '/analytics' },
-  { icon: '💬', label: 'Generative BI', path: '/bi' },
-  { icon: '⚡', label: 'Workflows', path: '/workflows' },
-  { icon: '🧠', label: 'Intelligence', path: '/intelligence' },
+  { icon: '📊', label: 'Analytics', path: '/analytics', roles: ['admin', 'manager'] },
+  { icon: '💬', label: 'Generative BI', path: '/bi', roles: ['admin', 'manager'] },
+  { icon: '⚡', label: 'Workflows', path: '/workflows', roles: ['admin', 'manager'] },
+  { icon: '🧠', label: 'Intelligence', path: '/intelligence', roles: ['admin', 'manager'] },
 ]
 
 const bottomItems = [
   { icon: '⚙️', label: 'Settings', path: '/settings' },
 ]
 
-// Mobile bottom bar: 4 primary items + a "More" sheet for everything else
-const mobilePrimaryItems = navItems.slice(0, 4)
-const mobileMoreItems = [...navItems.slice(4), ...bottomItems]
+function filterByRole<T extends { roles?: string[] }>(items: T[], role: string | null): T[] {
+  return items.filter(item => !item.roles || (role && item.roles.includes(role)))
+}
 
 const API = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/v1'
 const getToken = () => localStorage.getItem('token') || ''
@@ -40,6 +41,7 @@ export default function MainLayout() {
   const [showMoreSheet, setShowMoreSheet] = useState(false)
   const [notifications, setNotifications] = useState<any[]>([])
   const [unreadCount, setUnreadCount] = useState(0)
+  const [userRole, setUserRole] = useState<string | null>(null)
   const location = useLocation()
   const isMobile = useIsMobile()
 
@@ -63,6 +65,17 @@ export default function MainLayout() {
     const interval = setInterval(fetchNotifications, 10000)
     return () => clearInterval(interval)
   }, [])
+
+  useEffect(() => {
+    fetch(`${API}/auth/me`, { headers: { Authorization: `Bearer ${getToken()}` } })
+      .then(res => res.ok ? res.json() : null)
+      .then(data => { if (data?.role) setUserRole(data.role) })
+      .catch(() => {})
+  }, [])
+
+  const visibleNavItems = filterByRole(navItems, userRole)
+  const mobilePrimaryItems = visibleNavItems.slice(0, 4)
+  const mobileMoreItems = [...visibleNavItems.slice(4), ...bottomItems]
 
   const markAllRead = async () => {
     await fetch(`${API}/notifications/read-all`, { method: 'PATCH', headers: { Authorization: `Bearer ${getToken()}` } })
@@ -119,7 +132,7 @@ export default function MainLayout() {
           </div>
 
           <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '4px', overflowY: 'auto' }}>
-            {navItems.map(item => (
+            {visibleNavItems.map(item => (
               <Link key={item.path} to={item.path} className={`nav-item ${location.pathname === item.path ? 'active' : ''}`}
                 style={{ justifyContent: collapsed ? 'center' : 'flex-start' }} title={collapsed ? item.label : ''}>
                 <span style={{ fontSize: '16px', minWidth: '20px', textAlign: 'center' }}>{item.icon}</span>

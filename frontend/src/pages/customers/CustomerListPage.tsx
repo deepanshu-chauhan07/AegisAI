@@ -102,6 +102,38 @@ export default function CustomerListPage() {
   const [uploading, setUploading] = useState(false)
   const [uploadMsg, setUploadMsg] = useState('')
 
+  const [showDetail, setShowDetail] = useState(false)
+  const [detailCustomer, setDetailCustomer] = useState<Customer | null>(null)
+  const [detailTickets, setDetailTickets] = useState<any[]>([])
+  const [detailLoading, setDetailLoading] = useState(false)
+  const [churnInfo, setChurnInfo] = useState<any>(null)
+
+  const handleViewCustomer = async (customer: Customer) => {
+    setDetailCustomer(customer)
+    setShowDetail(true)
+    setDetailLoading(true)
+    setDetailTickets([])
+    setChurnInfo(null)
+    try {
+      const headers = { Authorization: `Bearer ${localStorage.getItem('token')}` }
+      const [ticketsRes, churnRes] = await Promise.all([
+        fetch(`${API}/tickets?customer_id=${customer.id}&size=20`, { headers }),
+        fetch(`${API}/intelligence/churn/${customer.id}`, { headers })
+      ])
+      if (ticketsRes.ok) {
+        const data = await ticketsRes.json()
+        setDetailTickets(data.data || [])
+      }
+      if (churnRes.ok) {
+        setChurnInfo(await churnRes.json())
+      }
+    } catch (err) {
+      console.error(err)
+    } finally {
+      setDetailLoading(false)
+    }
+  }
+
   const handleCsvUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
@@ -233,7 +265,7 @@ export default function CustomerListPage() {
                 </td>
                 <td style={{ padding: '16px 20px' }}>{getChurnBadge(c.churn_risk)}</td>
                 <td style={{ padding: '16px 20px' }}>
-                  <button style={{ background: 'rgba(225,29,46,0.1)', border: '1px solid rgba(225,29,46,0.2)', color: '#FF6B7A', padding: '6px 14px', borderRadius: '8px', fontSize: '13px', cursor: 'pointer' }}>
+                  <button onClick={() => handleViewCustomer(c)} style={{ background: 'rgba(225,29,46,0.1)', border: '1px solid rgba(225,29,46,0.2)', color: '#FF6B7A', padding: '6px 14px', borderRadius: '8px', fontSize: '13px', cursor: 'pointer' }}>
                     View →
                   </button>
                 </td>
@@ -280,6 +312,86 @@ export default function CustomerListPage() {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {showDetail && detailCustomer && (
+        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(8px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000, padding: '16px' }}>
+          <div className="glass-strong" style={{ width: '100%', maxWidth: '640px', maxHeight: '85vh', overflowY: 'auto', padding: '32px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '24px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+                <div style={{
+                  width: '48px', height: '48px', borderRadius: '50%',
+                  background: 'linear-gradient(135deg, #E11D2E, #FF3B4E)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  fontSize: '20px', fontWeight: '700'
+                }}>{detailCustomer.contact_name?.charAt(0)}</div>
+                <div>
+                  <h2 style={{ fontSize: '18px', fontWeight: '700' }}>{detailCustomer.contact_name}</h2>
+                  <p style={{ fontSize: '13px', color: '#94A3B8' }}>{detailCustomer.email}</p>
+                </div>
+              </div>
+              <button onClick={() => setShowDetail(false)} style={{ background: 'none', border: 'none', color: '#475569', fontSize: '20px', cursor: 'pointer' }}>✕</button>
+            </div>
+
+            {/* Basic Info Grid */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px', marginBottom: '20px' }}>
+              <div style={{ background: 'rgba(255,255,255,0.03)', borderRadius: '10px', padding: '12px' }}>
+                <p style={{ fontSize: '11px', color: '#64748B', marginBottom: '4px' }}>COMPANY</p>
+                <p style={{ fontSize: '13px', fontWeight: '600' }}>{detailCustomer.company_name || '—'}</p>
+              </div>
+              <div style={{ background: 'rgba(255,255,255,0.03)', borderRadius: '10px', padding: '12px' }}>
+                <p style={{ fontSize: '11px', color: '#64748B', marginBottom: '4px' }}>PLAN</p>
+                <p style={{ fontSize: '13px', fontWeight: '600', textTransform: 'capitalize' }}>{detailCustomer.plan_tier}</p>
+              </div>
+              <div style={{ background: 'rgba(255,255,255,0.03)', borderRadius: '10px', padding: '12px' }}>
+                <p style={{ fontSize: '11px', color: '#64748B', marginBottom: '4px' }}>HEALTH SCORE</p>
+                <p style={{ fontSize: '13px', fontWeight: '600', color: getHealthColor(detailCustomer.health_score) }}>{detailCustomer.health_score}</p>
+              </div>
+            </div>
+
+            {/* Churn Info */}
+            {churnInfo && !churnInfo.error && (
+              <div style={{ background: 'rgba(225,29,46,0.06)', border: '1px solid rgba(225,29,46,0.15)', borderRadius: '12px', padding: '16px', marginBottom: '20px' }}>
+                <p style={{ fontSize: '12px', color: '#FF8A93', fontWeight: '600', marginBottom: '8px' }}>CHURN RISK ANALYSIS</p>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                  <span style={{ fontSize: '24px', fontWeight: '700' }}>{Math.round((churnInfo.churn_probability || 0) * 100)}%</span>
+                  <span style={{ fontSize: '13px', color: '#94A3B8', textTransform: 'capitalize' }}>{churnInfo.churn_risk} risk</span>
+                </div>
+              </div>
+            )}
+
+            {/* Tickets */}
+            <div>
+              <p style={{ fontSize: '13px', fontWeight: '600', color: '#94A3B8', marginBottom: '12px' }}>
+                TICKETS ({detailTickets.length})
+              </p>
+              {detailLoading ? (
+                <p style={{ color: '#475569', fontSize: '13px', padding: '20px', textAlign: 'center' }}>Loading...</p>
+              ) : detailTickets.length === 0 ? (
+                <p style={{ color: '#475569', fontSize: '13px', padding: '20px', textAlign: 'center' }}>No tickets yet for this customer</p>
+              ) : (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  {detailTickets.map((t: any) => (
+                    <div key={t.id} style={{
+                      display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                      padding: '10px 14px', background: 'rgba(255,255,255,0.03)', borderRadius: '10px'
+                    }}>
+                      <span style={{ fontSize: '13px' }}>{t.title}</span>
+                      <span style={{
+                        fontSize: '11px', padding: '3px 10px', borderRadius: '20px',
+                        background: 'rgba(225,29,46,0.12)', color: '#FF8A93'
+                      }}>{t.status}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <div style={{ marginTop: '24px' }}>
+              <button className="btn-secondary" onClick={() => setShowDetail(false)} style={{ width: '100%', padding: '12px' }}>Close</button>
+            </div>
           </div>
         </div>
       )}

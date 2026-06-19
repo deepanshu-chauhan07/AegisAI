@@ -20,6 +20,7 @@ class UserResponse(BaseModel):
     email: str
     full_name: str
     is_active: bool
+    role: Optional[str] = None
 
     class Config:
         from_attributes = True

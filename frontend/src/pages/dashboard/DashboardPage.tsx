@@ -90,16 +90,14 @@ export default function DashboardPage() {
             borderRadius: '12px', padding: '16px', marginBottom: '16px'
           }}>
             <p style={{ fontSize: '13px', color: '#94A3B8', lineHeight: '1.6' }}>
-              3 tickets need attention. Customer <strong style={{color:'#f1f5f9'}}>Rahul Sharma</strong> has been waiting for 2+ hours on a critical billing issue.
+              AI Copilot is available inside every ticket — get instant reply suggestions, summaries, and sentiment analysis.
             </p>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            {['Suggest Reply', 'Summarize Ticket', 'Check Churn Risk'].map((action, i) => (
-              <button key={i} className="btn-secondary" style={{ textAlign: 'left', padding: '10px 14px', fontSize: '13px' }}>
-                {action} →
-              </button>
-            ))}
-          </div>
+          <a href="/tickets" style={{ textDecoration: 'none' }}>
+            <button className="btn-primary" style={{ width: '100%', padding: '12px', fontSize: '14px' }}>
+              Open Tickets →
+            </button>
+          </a>
         </div>
       </div>
     </div>
